@@ -12,18 +12,24 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public boolean LoginUser(User user) {
-        // 判断用户名不能重复
-
+    public boolean loginUser(User user) {
+        // 判断用户名不能重
+        if(usernameRepeat(user.getUsername())) {
+            return false;
+        }
+        if(nicknameRepeat(user.getNickname())) {
+            return false;
+        }
+        int count = userMapper.insertSelective(user);
         // 判断昵称不能重复
-        return false;
+        return count > 0 ? true: false;
     }
 
     @Override
     public boolean usernameRepeat(String username) {
         User user = new User();
         user.setUsername(username);
-        int count = userMapper.countUserByModel(user);
+        int count = userMapper.countUserSelective(user);
         return count > 0 ? true : false;
     }
 
@@ -31,7 +37,16 @@ public class UserServiceImpl implements UserService{
     public boolean nicknameRepeat(String nickname) {
         User user = new User();
         user.setNickname(nickname);
-        int count = userMapper.countUserByModel(user);
+        int count = userMapper.countUserSelective(user);
+        return count > 0 ? true : false;
+    }
+
+    @Override
+    public boolean login(User user) {
+        User param = new User();
+        param.setUsername(user.getUsername());
+        param.setPassword(user.getPassword());
+        int count = userMapper.countUserSelective(user);
         return count > 0 ? true : false;
     }
 }

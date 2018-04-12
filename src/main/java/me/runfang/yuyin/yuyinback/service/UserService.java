@@ -7,11 +7,15 @@ import me.runfang.yuyin.yuyinback.domain.core.User;
  */
 public interface UserService {
     // 注册
-    public boolean LoginUser(User user);
+    public boolean loginUser(User user);
 
     // 判断用户名是否重复
     public boolean usernameRepeat(String username);
 
     // 判断昵称是否重复
     public boolean nicknameRepeat(String nickname);
+
+    //登录
+    public boolean login(User user);
+
 }

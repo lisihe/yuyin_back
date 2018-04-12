@@ -28,7 +28,7 @@ public class UserMapperTest {
         user.setUsername("banary123456");
         user.setPassword("123456");
         user.setNickname("banary");
-        userMapper.insertUser(user);
+        userMapper.insertSelective(user);
         User u = userMapper.selectUserByUsername("banary123456");
         Assert.assertEquals("banary", u.getNickname());
     }
@@ -42,7 +42,7 @@ public class UserMapperTest {
     // 测试根据id查询用户
     @Test
     public void testSelectUserById() {
-        User user = userMapper.selectUserById(6);
+        User user = userMapper.selectByPrimaryKey(6);
         Assert.assertEquals("tiny123456", user.getUsername());
     }
 
@@ -53,7 +53,7 @@ public class UserMapperTest {
         user.setUsername("banary000");
         user.setPassword("111111");
         user.setNickname("banarymore");
-        userMapper.updateUser(user);
+        userMapper.updateByPrimaryKeySelective(user);
         Assert.assertEquals("banary000", user.getUsername());
     }
 
@@ -61,7 +61,7 @@ public class UserMapperTest {
     @Test
     public void testDeleteUserById() {
         int count = userMapper.countAllUser();
-        userMapper.deleteUser(8);
+        userMapper.deleteByPrimaryKey(8);
         Assert.assertEquals(count - 1, userMapper.countAllUser());
     }
 
@@ -71,7 +71,7 @@ public class UserMapperTest {
         User user = new User();
         user.setUsername("tiny123456");
         user.setNickname("tiny");
-        Assert.assertEquals(1, userMapper.countUserByModel(user));
+        Assert.assertEquals(1, userMapper.countUserSelective(user));
     }
 
 }

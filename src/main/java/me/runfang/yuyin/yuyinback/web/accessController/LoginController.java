@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("api/login")
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -15,8 +15,26 @@ public class LoginController {
      */
     @PostMapping("/")
     public String loginUser(@RequestBody User user) {
+        boolean inserted = userService.loginUser(user);
+        if(inserted) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
 
-        return "success";
+    /**
+     * 登录
+     */
+    @PostMapping("/submit")
+    public String login(@RequestBody User user) {
+        boolean ishave = userService.login(user);
+        System.out.println("ishave" + ishave);
+        if(ishave) {
+            return user.getUsername();
+        } else {
+            return "error";
+        }
     }
 
     /**

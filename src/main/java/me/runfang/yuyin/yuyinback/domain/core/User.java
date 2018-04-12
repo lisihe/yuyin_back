@@ -1,19 +1,27 @@
 package me.runfang.yuyin.yuyinback.domain.core;
 
-/**
- * 用户，包含了用户名、密码、昵称等信息。
- */
 public class User {
-    private int id;
+    private Integer id;
+
     private String username;
+
     private String password;
+
     private String nickname;
 
-    public int getId() {
+    private Integer location;
+
+    private String signature;
+
+    private String portrait_url;
+
+    private String email;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -22,7 +30,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -30,7 +38,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getNickname() {
@@ -38,6 +46,38 @@ public class User {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public Integer getLocation() {
+        return location;
+    }
+
+    public void setLocation(Integer location) {
+        this.location = location;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature == null ? null : signature.trim();
+    }
+
+    public String getPortrait_url() {
+        return portrait_url;
+    }
+
+    public void setPortrait_url(String portrait_url) {
+        this.portrait_url = portrait_url == null ? null : portrait_url.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }
